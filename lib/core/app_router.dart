@@ -1,3 +1,4 @@
+import 'package:face_attendance/features/login/presentation/views/login_view.dart';
 import 'package:face_attendance/features/splash/presentation/splash_view.dart';
 import 'package:go_router/go_router.dart';
 abstract class AppRouter{
@@ -11,7 +12,7 @@ abstract class AppRouter{
       ),
       GoRoute(
         path: AppRouter.rLogin,
-        builder: (context,state)=>const SplashView(),
+        builder: (context,state)=>const LoginView(),
       ),
     ],
   );
