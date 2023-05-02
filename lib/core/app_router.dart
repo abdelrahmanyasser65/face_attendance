@@ -1,3 +1,4 @@
+import 'package:face_attendance/features/splash/presentation/splash_view.dart';
 import 'package:go_router/go_router.dart';
 abstract class AppRouter{
   static const rLogin="/loginView";
