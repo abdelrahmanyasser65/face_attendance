@@ -1,4 +1,3 @@
-import 'package:face_attendance/core/app_router.dart';
 import 'package:face_attendance/core/resours/colors.dart';
 import 'package:face_attendance/core/resours/strings.dart';
 import 'package:face_attendance/core/widgets/custom_button.dart';
@@ -7,13 +6,12 @@ import 'package:face_attendance/core/widgets/custom_text.dart';
 import 'package:face_attendance/features/login/presentation/view_model/login_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../../core/resours/images.dart';
 
-class LoginViewBody extends StatelessWidget {
-  const LoginViewBody({Key? key}) : super(key: key);
+class SignUpViewBody extends StatelessWidget {
+  const SignUpViewBody({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +26,7 @@ class LoginViewBody extends StatelessWidget {
           ),
           children: [
             CustomText(
-              text: Strings.login,
+              text: Strings.register,
               fontWeight: FontWeight.bold,
               fontSize: 24.sp,
               color: ColorManager.primary,
@@ -99,9 +97,7 @@ class LoginViewBody extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
                 GestureDetector(
-                  onTap: (){
-                    GoRouter.of(context).push(AppRouter.rSignUp);
-                  },
+                  onTap: (){},
                   child: CustomText(
                     text: Strings.register,
                     fontSize: 12.sp,
