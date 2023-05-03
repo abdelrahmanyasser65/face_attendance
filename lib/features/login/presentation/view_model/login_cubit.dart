@@ -1,4 +1,6 @@
+import 'package:face_attendance/core/app_constants.dart';
 import 'package:face_attendance/core/end_points.dart';
+import 'package:face_attendance/core/helpers/cache_helper.dart';
 import 'package:face_attendance/core/helpers/dio_helper.dart';
 import 'package:face_attendance/core/resours/colors.dart';
 import 'package:face_attendance/core/widgets/custom_toast.dart';
@@ -27,6 +29,10 @@ LoginModel ?loginModel;
               text: loginModel!.status,
               color: Colors.green
             );
+            CacheHelper.put(key: "token", value: loginModel!.token).then((value) {
+              AppConstants.token=loginModel!.token!;
+            });
+
           }
     }).catchError((e){});
   }
