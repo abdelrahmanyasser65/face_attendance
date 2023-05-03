@@ -1,3 +1,4 @@
+import 'package:face_attendance/core/app_constants.dart';
 import 'package:face_attendance/core/resours/colors.dart';
 import 'package:face_attendance/core/resours/strings.dart';
 import 'package:face_attendance/core/widgets/custom_button.dart';
@@ -5,6 +6,7 @@ import 'package:face_attendance/core/widgets/custom_form.dart';
 import 'package:face_attendance/core/widgets/custom_text.dart';
 import 'package:face_attendance/features/login/presentation/view_model/login_cubit.dart';
 import 'package:face_attendance/features/sign_up/presentation/view_model/sign_up_cubit.dart';
+import 'package:face_attendance/features/sign_up/presentation/views/widget/model_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -13,14 +15,15 @@ import 'package:sizer/sizer.dart';
 import '../../../../../core/app_router.dart';
 import '../../../../../core/resours/images.dart';
 
-class SignUpViewBody extends StatelessWidget {
-  const SignUpViewBody({Key? key}) : super(key: key);
 
+class SignViewBody extends StatelessWidget {
+  const SignViewBody({super.key});
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SignUpCubit, SignUpState>(
       builder: (context, state) {
         var cubit=SignUpCubit();
+        cubit.positionController.text=AppConstants.position;
         return ListView(
           padding: EdgeInsets.only(
             top: 7.h,
@@ -84,14 +87,40 @@ class SignUpViewBody extends StatelessWidget {
             ),
             SizedBox(height: 3.h,),
             CustomText(
-              text: Strings.department,
+              text: Strings.position,
               fontSize: 14.sp,
               fontWeight: FontWeight.w500,
             ),
+            SizedBox(height: 1.h,),
+            CustomTextField(
 
+              controller: cubit.positionController,
+              keyboardType: TextInputType.text,
+              hintText: Strings.positionHint,
+
+              onTap: (){
+
+                FocusScope.of(context).requestFocus(FocusNode());
+                showModalBottomSheet(context: context,
+                    shape:const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      )
+                    ),
+                    builder: (context){
+                  return   ShowModelBottomSheet(
+
+                  );
+                    }
+                );
+
+              },
+            ),
             SizedBox(height: 4.h,),
             CustomButton(
-              onPressed: (){},
+              onPressed: (){
+              },
                 backGroundColor: ColorManager.primary,
                 textColor: ColorManager.white,
                 text: Strings.register,

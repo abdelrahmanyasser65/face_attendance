@@ -1,4 +1,5 @@
 import 'package:face_attendance/core/resours/colors.dart';
+import 'package:face_attendance/core/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -12,6 +13,9 @@ class CustomTextField extends StatelessWidget {
         required this.keyboardType,
         this.maxLines = 1,
         required this.hintText,
+        this.enabled=true,
+
+        this.onTap,
         this.obscureText = false})
       : super(key: key);
   final TextEditingController controller;
@@ -22,12 +26,17 @@ class CustomTextField extends StatelessWidget {
   final int maxLines;
   final String hintText;
   final Widget ?suffixIcon;
+  final bool enabled ;
+  final Function()? onTap;
+
   @override
   Widget build(BuildContext context) {
     return TextField(
+      enabled: enabled,
 
       controller: controller,
       onChanged: onChanged,
+      onTap: onTap,
       keyboardType: keyboardType,
       cursorColor: ColorManager.grey,
       obscureText: obscureText,
@@ -36,6 +45,7 @@ class CustomTextField extends StatelessWidget {
       decoration: InputDecoration(
         suffixIcon:suffixIcon,
         hintText: hintText,
+
         hintStyle: TextStyle(fontSize: 15, color: ColorManager.hintTextColor),
         fillColor: ColorManager.lightGray,
         filled: true,

@@ -5,8 +5,14 @@ part 'sign_up_state.dart';
 
 class SignUpCubit extends Cubit<SignUpState> {
   SignUpCubit() : super(SignUpInitial());
-  final TextEditingController nameController=TextEditingController();
-  final TextEditingController employeeIdController=TextEditingController();
-  final TextEditingController departmentController=TextEditingController();
+  String position='';
+   TextEditingController nameController=TextEditingController();
+   TextEditingController employeeIdController=TextEditingController();
+   TextEditingController departmentController=TextEditingController();
+  TextEditingController positionController=TextEditingController();
+ void positionName(val){
+   position=val;
+   emit(PositionNameState());
+ }
 
 }

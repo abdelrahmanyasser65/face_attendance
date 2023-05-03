@@ -16,6 +16,7 @@ class Strings{
   static const department="Department";
   static const departmentHint="Enter your department";
   static const position="Position";
+  static const positionHint="Select Your position";
   static const manager="Manager";
   static const teamLeader="Team Leader";
   static const projectLeader="Project Team Leader";
