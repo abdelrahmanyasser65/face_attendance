@@ -1,5 +1,7 @@
 import 'package:face_attendance/core/end_points.dart';
 import 'package:face_attendance/core/helpers/dio_helper.dart';
+import 'package:face_attendance/core/resours/colors.dart';
+import 'package:face_attendance/core/widgets/custom_toast.dart';
 import 'package:face_attendance/features/login/data/models/LoginModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,7 +23,10 @@ LoginModel ?loginModel;
         data: json).then((value){
           if(value.statusCode==200){
             loginModel=LoginModel.fromJson(value.data);
-            buildto
+            customToast(
+              text: loginModel!.status,
+              color: Colors.green
+            );
           }
     }).catchError((e){});
   }
