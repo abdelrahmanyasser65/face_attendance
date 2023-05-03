@@ -4,10 +4,13 @@ import 'package:face_attendance/core/widgets/custom_button.dart';
 import 'package:face_attendance/core/widgets/custom_form.dart';
 import 'package:face_attendance/core/widgets/custom_text.dart';
 import 'package:face_attendance/features/login/presentation/view_model/login_cubit.dart';
+import 'package:face_attendance/features/sign_up/presentation/view_model/sign_up_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../../../core/app_router.dart';
 import '../../../../../core/resours/images.dart';
 
 class SignUpViewBody extends StatelessWidget {
@@ -15,9 +18,9 @@ class SignUpViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginCubit, LoginState>(
+    return BlocBuilder<SignUpCubit, SignUpState>(
       builder: (context, state) {
-        var cubit=LoginCubit();
+        var cubit=SignUpCubit();
         return ListView(
           padding: EdgeInsets.only(
             top: 7.h,
@@ -39,52 +42,59 @@ class SignUpViewBody extends StatelessWidget {
             SizedBox(
               height: 5.h,
             ),
+
             CustomText(
-              text: Strings.email,
+              text: Strings.name,
               fontSize: 14.sp,
               fontWeight: FontWeight.w500,
             ),
-            SizedBox(height: 2.h,),
+            SizedBox(height: 1.h,),
             CustomTextField(
-                controller: cubit.emailController,
-                keyboardType: TextInputType.emailAddress,
-                hintText: Strings.emailHint),
-            SizedBox(height: 5.h,),
+                controller: cubit.nameController,
+                keyboardType: TextInputType.name,
+                hintText: Strings.nameHint),
+            SizedBox(height: 3.h,),
             CustomText(
-              text: Strings.password,
+              text: Strings.employeeId,
               fontSize: 14.sp,
               fontWeight: FontWeight.w500,
             ),
-            SizedBox(height: 2.h,),
+            SizedBox(height: 1.h,),
             CustomTextField(
-              obscureText: true,
-              controller: cubit.passwordController,
-              keyboardType: TextInputType.visiblePassword,
-              hintText: Strings.passwordHint,
+              controller: cubit.employeeIdController,
+              keyboardType: TextInputType.number,
+              hintText: Strings.employeeIdHint,
 
 
             ),
-            SizedBox(height: 2.h,),
-            Align(
-              alignment: Alignment.centerRight,
-              child: GestureDetector(
-                child:CustomText(
-                  text: Strings.forgotPas,
-                  color: ColorManager.primary,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 12.sp,
-                ),
-                onTap: (){
 
-                },
-              ),
+            SizedBox(height: 3.h,),
+            CustomText(
+              text: Strings.department,
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w500,
             ),
+            SizedBox(height: 1.h,),
+            CustomTextField(
+              controller: cubit.departmentController,
+              keyboardType: TextInputType.text,
+              hintText: Strings.departmentHint,
+
+
+            ),
+            SizedBox(height: 3.h,),
+            CustomText(
+              text: Strings.department,
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w500,
+            ),
+
             SizedBox(height: 4.h,),
             CustomButton(
               onPressed: (){},
                 backGroundColor: ColorManager.primary,
                 textColor: ColorManager.white,
-                text: Strings.login,
+                text: Strings.register,
               fontSize: 16.sp,
             ),
             SizedBox(height: 3.h,),
@@ -92,14 +102,16 @@ class SignUpViewBody extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomText(
-                  text: Strings.areYouNew,
+                  text: Strings.youHaveAcc,
                   fontSize: 11.sp,
                   fontWeight: FontWeight.w600,
                 ),
                 GestureDetector(
-                  onTap: (){},
+                  onTap: (){
+                    GoRouter.of(context).push(AppRouter.rLogin);
+                  },
                   child: CustomText(
-                    text: Strings.register,
+                    text: Strings.login,
                     fontSize: 12.sp,
                     color: ColorManager.primary,
                     fontWeight: FontWeight.bold,

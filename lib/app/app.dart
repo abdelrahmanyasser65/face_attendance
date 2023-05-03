@@ -1,5 +1,6 @@
 import 'package:face_attendance/core/app_router.dart';
 import 'package:face_attendance/features/login/presentation/view_model/login_cubit.dart';
+import 'package:face_attendance/features/sign_up/presentation/view_model/sign_up_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
@@ -14,7 +15,10 @@ class FaceAttendance extends StatelessWidget {
           providers: [
             BlocProvider(
               create: (context)=>LoginCubit(),
-            )
+            ),
+            BlocProvider(
+              create: (context)=>SignUpCubit(),
+            ),
           ],
           child: MaterialApp.router(
             routerConfig: AppRouter.router,
