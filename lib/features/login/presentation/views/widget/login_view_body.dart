@@ -20,100 +20,108 @@ class LoginViewBody extends StatelessWidget {
     return BlocBuilder<LoginCubit, LoginState>(
       builder: (context, state) {
         var cubit=LoginCubit();
-        return ListView(
-          padding: EdgeInsets.only(
-            top: 7.h,
-            left: 3.h,
-            right: 3.h,
-          ),
-          children: [
-            CustomText(
-              text: Strings.login,
-              fontWeight: FontWeight.bold,
-              fontSize: 24.sp,
-              color: ColorManager.primary,
+        if(state is LoginLoadingState){
+          return const Center(
+            child:  CircularProgressIndicator(),
+          );
+        }else{
+          return ListView(
+            padding: EdgeInsets.only(
+              top: 7.h,
+              left: 3.h,
+              right: 3.h,
             ),
-            SizedBox(height: 2.h,),
-            Image.asset(
-              Images.logo,
-              height: 15.h,
-            ),
-            SizedBox(
-              height: 5.h,
-            ),
-            CustomText(
-              text: Strings.email,
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w500,
-            ),
-            SizedBox(height: 2.h,),
-            CustomTextField(
-                controller: cubit.emailController,
-                keyboardType: TextInputType.emailAddress,
-                hintText: Strings.emailHint),
-            SizedBox(height: 5.h,),
-            CustomText(
-              text: Strings.password,
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w500,
-            ),
-            SizedBox(height: 2.h,),
-            CustomTextField(
-              obscureText: true,
-              controller: cubit.passwordController,
-              keyboardType: TextInputType.visiblePassword,
-              hintText: Strings.passwordHint,
-
-
-            ),
-            SizedBox(height: 2.h,),
-            Align(
-              alignment: Alignment.centerRight,
-              child: GestureDetector(
-                child:CustomText(
-                  text: Strings.forgotPas,
-                  color: ColorManager.primary,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 12.sp,
-                ),
-                onTap: (){
-
-                },
+            children: [
+              CustomText(
+                text: Strings.login,
+                fontWeight: FontWeight.bold,
+                fontSize: 24.sp,
+                color: ColorManager.primary,
               ),
-            ),
-            SizedBox(height: 4.h,),
-            CustomButton(
-              onPressed: (){},
+              SizedBox(height: 2.h,),
+              Image.asset(
+                Images.logo,
+                height: 15.h,
+              ),
+              SizedBox(
+                height: 5.h,
+              ),
+              CustomText(
+                text: Strings.email,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w500,
+              ),
+              SizedBox(height: 2.h,),
+              CustomTextField(
+                  controller: cubit.emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  hintText: Strings.emailHint),
+              SizedBox(height: 5.h,),
+              CustomText(
+                text: Strings.password,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w500,
+              ),
+              SizedBox(height: 2.h,),
+              CustomTextField(
+                obscureText: true,
+                controller: cubit.passwordController,
+                keyboardType: TextInputType.visiblePassword,
+                hintText: Strings.passwordHint,
+
+
+              ),
+              SizedBox(height: 2.h,),
+              Align(
+                alignment: Alignment.centerRight,
+                child: GestureDetector(
+                  child:CustomText(
+                    text: Strings.forgotPas,
+                    color: ColorManager.primary,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12.sp,
+                  ),
+                  onTap: (){
+
+                  },
+                ),
+              ),
+              SizedBox(height: 4.h,),
+              CustomButton(
+                onPressed: (){
+                  cubit.validationLogin(context);
+                },
                 backGroundColor: ColorManager.primary,
                 textColor: ColorManager.white,
                 text: Strings.login,
-              fontSize: 16.sp,
-            ),
-            SizedBox(height: 3.h,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CustomText(
-                  text: Strings.areYouNew,
-                  fontSize: 11.sp,
-                  fontWeight: FontWeight.w600,
-                ),
-                GestureDetector(
-                  onTap: (){
-                    GoRouter.of(context).push(AppRouter.rSignUp);
-                  },
-                  child: CustomText(
-                    text: Strings.register,
-                    fontSize: 12.sp,
-                    color: ColorManager.primary,
-                    fontWeight: FontWeight.bold,
+                fontSize: 16.sp,
+              ),
+              SizedBox(height: 3.h,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CustomText(
+                    text: Strings.areYouNew,
+                    fontSize: 11.sp,
+                    fontWeight: FontWeight.w600,
                   ),
-                ),
-              ],
-            ),
+                  GestureDetector(
+                    onTap: (){
+                      GoRouter.of(context).push(AppRouter.rSignUp);
+                    },
+                    child: CustomText(
+                      text: Strings.register,
+                      fontSize: 12.sp,
+                      color: ColorManager.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
 
-          ],
-        );
+            ],
+          );
+        }
       },
     );
   }

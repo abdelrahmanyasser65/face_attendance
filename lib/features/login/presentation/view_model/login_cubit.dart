@@ -1,4 +1,5 @@
 import 'package:face_attendance/core/app_constants.dart';
+import 'package:face_attendance/core/app_router.dart';
 import 'package:face_attendance/core/end_points.dart';
 import 'package:face_attendance/core/helpers/cache_helper.dart';
 import 'package:face_attendance/core/helpers/dio_helper.dart';
@@ -7,6 +8,7 @@ import 'package:face_attendance/core/widgets/custom_toast.dart';
 import 'package:face_attendance/features/login/data/models/LoginModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 part 'login_state.dart';
 
@@ -21,7 +23,8 @@ LoginModel ?loginModel;
       'password': passwordController.text
     };
     emit(LoginLoadingState());
-    DioHelper.postData(url: EndPoints.loginEndPoint,
+    DioHelper.postData(
+        url: EndPoints.loginEndPoint,
         data: json).then((value){
           if(value.statusCode==200){
             loginModel=LoginModel.fromJson(value.data);
@@ -32,8 +35,35 @@ LoginModel ?loginModel;
             CacheHelper.put(key: "token", value: loginModel!.token).then((value) {
               AppConstants.token=loginModel!.token!;
             });
-
+            GoRouter.of(context).pushReplacement(AppRouter.rHome);
+            emailController.text='';
+            passwordController.text='';
           }
-    }).catchError((e){});
+          emit(LoginSuccessState());
+    }).catchError((e){
+      customToast(
+        text: "Incorrect Email or Password",
+        color: Colors.red
+      );
+      emit(LoginErrorState(e.toString()));
+    });
+  }
+  void validationLogin(context){
+    if(emailController.text.isEmpty){
+      customToast(
+          text: "Enter Your Email",
+          color: Colors.red
+      );
+    }
+    else if(passwordController.text.length<8){
+      customToast(
+          text: "Short Password",
+          color: Colors.red
+      );
+    }
+    else{
+      postLogin(context);
+    }
+
   }
 }
