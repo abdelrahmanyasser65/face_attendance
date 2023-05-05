@@ -4,13 +4,12 @@ import 'package:face_attendance/core/resours/strings.dart';
 import 'package:face_attendance/core/widgets/custom_button.dart';
 import 'package:face_attendance/core/widgets/custom_form.dart';
 import 'package:face_attendance/core/widgets/custom_text.dart';
+import 'package:face_attendance/core/widgets/logo_image.dart';
 import 'package:face_attendance/features/login/presentation/view_model/login_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sizer/sizer.dart';
-
-import '../../../../../core/resours/images.dart';
 
 class LoginViewBody extends StatelessWidget {
   const LoginViewBody({Key? key}) : super(key: key);
@@ -39,10 +38,7 @@ class LoginViewBody extends StatelessWidget {
                 color: ColorManager.primary,
               ),
               SizedBox(height: 2.h,),
-              Image.asset(
-                Images.logo,
-                height: 15.h,
-              ),
+             const LogoImage(),
               SizedBox(
                 height: 5.h,
               ),

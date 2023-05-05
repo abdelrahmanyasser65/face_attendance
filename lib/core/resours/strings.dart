@@ -22,4 +22,8 @@ class Strings{
   static const projectLeader="Project Team Leader";
   static const depHead="Department Head";
   static const employee="Employee";
+  static const registration="Registration";
+  static const adminLogin="Admin Login";
+  static const welcomeSystem="Welcome To Face Attendance System";
+  static const aboutApp="About Application";
 }
