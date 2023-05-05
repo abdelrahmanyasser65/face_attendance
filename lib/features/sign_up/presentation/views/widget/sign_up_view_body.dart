@@ -4,9 +4,8 @@ import 'package:face_attendance/core/resours/strings.dart';
 import 'package:face_attendance/core/widgets/custom_button.dart';
 import 'package:face_attendance/core/widgets/custom_form.dart';
 import 'package:face_attendance/core/widgets/custom_text.dart';
-import 'package:face_attendance/features/login/presentation/view_model/login_cubit.dart';
 import 'package:face_attendance/features/sign_up/presentation/view_model/sign_up_cubit.dart';
-import 'package:face_attendance/features/sign_up/presentation/views/widget/model_bottom_sheet.dart';
+import 'package:face_attendance/features/sign_up/presentation/views/widget/model_bottom_sheet_sign.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -32,7 +31,7 @@ class SignViewBody extends StatelessWidget {
           ),
           children: [
             CustomText(
-              text: Strings.register,
+              text: Strings.registration,
               fontWeight: FontWeight.bold,
               fontSize: 24.sp,
               color: ColorManager.primary,
@@ -118,36 +117,42 @@ class SignViewBody extends StatelessWidget {
               },
             ),
             SizedBox(height: 4.h,),
-            CustomButton(
-              onPressed: (){
-              },
-                backGroundColor: ColorManager.primary,
-                textColor: ColorManager.white,
-                text: Strings.register,
-              fontSize: 16.sp,
-            ),
-            SizedBox(height: 3.h,),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CustomText(
-                  text: Strings.youHaveAcc,
-                  fontSize: 11.sp,
-                  fontWeight: FontWeight.w600,
+                Expanded(
+                  child: CustomButton(
+                      buttonStyle: TextButton.styleFrom(
+                          backgroundColor:ColorManager.white,
+                          shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                                  width: 0.2.h,
+                                  color: ColorManager.primary
+                              ),
+                              borderRadius:BorderRadius.circular(15)
+                          )),
+                      backGroundColor: ColorManager.white,
+                      fontSize: 14.sp,
+                      onPressed: (){
+                        GoRouter.of(context).pop();
+                      },
+                      textColor: ColorManager.primary,
+                      text: Strings.back),
                 ),
-                GestureDetector(
-                  onTap: (){
-                    GoRouter.of(context).push(AppRouter.rLogin);
-                  },
-                  child: CustomText(
-                    text: Strings.login,
-                    fontSize: 12.sp,
-                    color: ColorManager.primary,
-                    fontWeight: FontWeight.bold,
+                SizedBox(width: 4.h,),
+                Expanded(
+                  child: CustomButton(
+                    onPressed: () {
+                      GoRouter.of(context).push(AppRouter.rTakePhoto);
+                    },
+                    backGroundColor: ColorManager.primary,
+                    textColor: ColorManager.white,
+                    text: Strings.next,
+                    fontSize: 16.sp,
                   ),
                 ),
               ],
             ),
+
 
           ],
         );

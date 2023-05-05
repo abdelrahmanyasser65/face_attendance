@@ -26,4 +26,9 @@ class Strings{
   static const adminLogin="Admin Login";
   static const welcomeSystem="Welcome To Face Attendance System";
   static const aboutApp="About Application";
+  static const back="Back";
+  static const next="Next";
+  static const takeAPhoto="Take a Photo";
+  static const takeYourFace="kindly, take a photo with a clear and high_quality view of your face";
+  static const addPhoto="Add Photo";
 }
