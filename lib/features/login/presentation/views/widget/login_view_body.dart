@@ -1,16 +1,15 @@
-import 'package:face_attendance/core/app_router.dart';
 import 'package:face_attendance/core/resours/colors.dart';
 import 'package:face_attendance/core/resours/strings.dart';
 import 'package:face_attendance/core/widgets/custom_button.dart';
 import 'package:face_attendance/core/widgets/custom_form.dart';
 import 'package:face_attendance/core/widgets/custom_text.dart';
+import 'package:face_attendance/core/widgets/custom_toast.dart';
 import 'package:face_attendance/core/widgets/logo_image.dart';
 import 'package:face_attendance/features/login/presentation/view_model/login_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:sizer/sizer.dart';
-
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 class LoginViewBody extends StatelessWidget {
   const LoginViewBody({Key? key}) : super(key: key);
 
@@ -18,106 +17,83 @@ class LoginViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<LoginCubit, LoginState>(
       builder: (context, state) {
+        print(state);
         var cubit=LoginCubit();
-        if(state is LoginLoadingState){
-          return const Center(
-            child:  CircularProgressIndicator(),
-          );
-        }else{
-          return ListView(
-            padding: EdgeInsets.only(
-              top: 7.h,
-              left: 3.h,
-              right: 3.h,
-            ),
-            children: [
-              CustomText(
-                text: Strings.login,
-                fontWeight: FontWeight.bold,
-                fontSize: 24.sp,
-                color: ColorManager.primary,
-              ),
-              SizedBox(height: 2.h,),
-             const LogoImage(),
-              SizedBox(
-                height: 5.h,
-              ),
-              CustomText(
-                text: Strings.email,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w500,
-              ),
-              SizedBox(height: 2.h,),
-              CustomTextField(
-                  controller: cubit.emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  hintText: Strings.emailHint),
-              SizedBox(height: 5.h,),
-              CustomText(
-                text: Strings.password,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w500,
-              ),
-              SizedBox(height: 2.h,),
-              CustomTextField(
-                obscureText: true,
-                controller: cubit.passwordController,
-                keyboardType: TextInputType.visiblePassword,
-                hintText: Strings.passwordHint,
+        return ModalProgressHUD(
+          inAsyncCall:state is LoginLoadingState,
+          child:  ListView(
+        padding: EdgeInsets.only(
+        top: 7.h,
+          left: 3.h,
+          right: 3.h,
+        ),
+        children: [
+        CustomText(
+        text: Strings.login,
+        fontWeight: FontWeight.bold,
+        fontSize: 24.sp,
+        color: ColorManager.primary,
+        ),
+        SizedBox(height: 2.h,),
+        const LogoImage(),
+        SizedBox(
+        height: 5.h,
+        ),
+        CustomText(
+        text: Strings.email,
+        fontSize: 14.sp,
+        fontWeight: FontWeight.w500,
+        ),
+        SizedBox(height: 2.h,),
+        CustomTextField(
+        controller: cubit.emailController,
+        keyboardType: TextInputType.emailAddress,
+        hintText: Strings.emailHint),
+        SizedBox(height: 5.h,),
+        CustomText(
+        text: Strings.password,
+        fontSize: 14.sp,
+        fontWeight: FontWeight.w500,
+        ),
+        SizedBox(height: 2.h,),
+        CustomTextField(
+        obscureText: true,
+        controller: cubit.passwordController,
+        keyboardType: TextInputType.visiblePassword,
+        hintText: Strings.passwordHint,
 
 
-              ),
-              SizedBox(height: 2.h,),
-              Align(
-                alignment: Alignment.centerRight,
-                child: GestureDetector(
-                  child:CustomText(
-                    text: Strings.forgotPas,
-                    color: ColorManager.primary,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 12.sp,
-                  ),
-                  onTap: (){
+        ),
+        SizedBox(height: 2.h,),
+        Align(
+        alignment: Alignment.centerRight,
+        child: GestureDetector(
+        child:CustomText(
+        text: Strings.forgotPas,
+        color: ColorManager.primary,
+        fontWeight: FontWeight.bold,
+        fontSize: 12.sp,
+        ),
+        onTap: (){
 
-                  },
-                ),
-              ),
-              SizedBox(height: 4.h,),
-              CustomButton(
-                onPressed: (){
-                  cubit.validationLogin(context);
-                },
-                backGroundColor: ColorManager.primary,
-                textColor: ColorManager.white,
-                text: Strings.login,
-                fontSize: 16.sp,
-              ),
-              SizedBox(height: 3.h,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CustomText(
-                    text: Strings.areYouNew,
-                    fontSize: 11.sp,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  GestureDetector(
-                    onTap: (){
-                      GoRouter.of(context).push(AppRouter.rSignUp);
-                    },
-                    child: CustomText(
-                      text: Strings.register,
-                      fontSize: 12.sp,
-                      color: ColorManager.primary,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
+        },
+        ),
+        ),
+        SizedBox(height: 4.h,),
+        CustomButton(
+        onPressed: (){
+        cubit.validationLogin(context);
+        },
+        backGroundColor: ColorManager.primary,
+        textColor: ColorManager.white,
+        text: Strings.login,
+        fontSize: 16.sp,
+        ),
 
-            ],
-          );
-        }
+
+        ],
+        )
+        );
       },
     );
   }
