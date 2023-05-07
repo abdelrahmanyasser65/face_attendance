@@ -16,147 +16,141 @@ import '../../../../../core/resours/images.dart';
 
 
 class SignViewBody extends StatelessWidget {
-  const SignViewBody({super.key});
+  const SignViewBody({super.key, required this.cubit});
+  final SignUpCubit cubit;
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SignUpCubit, SignUpState>(
-      builder: (context, state) {
-        var cubit=SignUpCubit();
-        cubit.positionController.text=AppConstants.position;
-        return ListView(
-          padding: EdgeInsets.only(
-            top: 7.h,
-            left: 3.h,
-            right: 3.h,
-          ),
-          children: [
-            CustomText(
-              text: Strings.registration,
-              fontWeight: FontWeight.bold,
-              fontSize: 24.sp,
-              color: ColorManager.primary,
-            ),
-            SizedBox(height: 2.h,),
-            Image.asset(
-              Images.logo,
-              height: 15.h,
-            ),
-            SizedBox(
-              height: 5.h,
-            ),
+    return   ListView(
+      padding: EdgeInsets.only(
+        top: 7.h,
+        left: 3.h,
+        right: 3.h,
+      ),
+      children: [
+        CustomText(
+          text: Strings.registration,
+          fontWeight: FontWeight.bold,
+          fontSize: 24.sp,
+          color: ColorManager.primary,
+        ),
+        SizedBox(height: 2.h,),
+        Image.asset(
+          Images.logo,
+          height: 15.h,
+        ),
+        SizedBox(
+          height: 5.h,
+        ),
 
-            CustomText(
-              text: Strings.name,
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w500,
-            ),
-            SizedBox(height: 1.h,),
-            CustomTextField(
-                controller: cubit.nameController,
-                keyboardType: TextInputType.name,
-                hintText: Strings.nameHint),
-            SizedBox(height: 3.h,),
-            CustomText(
-              text: Strings.employeeId,
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w500,
-            ),
-            SizedBox(height: 1.h,),
-            CustomTextField(
-              controller: cubit.employeeIdController,
-              keyboardType: TextInputType.number,
-              hintText: Strings.employeeIdHint,
+        CustomText(
+          text: Strings.name,
+          fontSize: 14.sp,
+          fontWeight: FontWeight.w500,
+        ),
+        SizedBox(height: 1.h,),
+        CustomTextField(
+            controller: cubit.nameController,
+            keyboardType: TextInputType.name,
+            hintText: Strings.nameHint),
+        SizedBox(height: 3.h,),
+        CustomText(
+          text: Strings.employeeId,
+          fontSize: 14.sp,
+          fontWeight: FontWeight.w500,
+        ),
+        SizedBox(height: 1.h,),
+        CustomTextField(
+          controller: cubit.employeeIdController,
+          keyboardType: TextInputType.number,
+          hintText: Strings.employeeIdHint,
 
 
-            ),
+        ),
 
-            SizedBox(height: 3.h,),
-            CustomText(
-              text: Strings.department,
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w500,
-            ),
-            SizedBox(height: 1.h,),
-            CustomTextField(
-              controller: cubit.departmentController,
-              keyboardType: TextInputType.text,
-              hintText: Strings.departmentHint,
+        SizedBox(height: 3.h,),
+        CustomText(
+          text: Strings.department,
+          fontSize: 14.sp,
+          fontWeight: FontWeight.w500,
+        ),
+        SizedBox(height: 1.h,),
+        CustomTextField(
+          controller: cubit.departmentController,
+          keyboardType: TextInputType.text,
+          hintText: Strings.departmentHint,
 
 
-            ),
-            SizedBox(height: 3.h,),
-            CustomText(
-              text: Strings.position,
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w500,
-            ),
-            SizedBox(height: 1.h,),
-            CustomTextField(
+        ),
+        SizedBox(height: 3.h,),
+        CustomText(
+          text: Strings.position,
+          fontSize: 14.sp,
+          fontWeight: FontWeight.w500,
+        ),
+        SizedBox(height: 1.h,),
+        CustomTextField(
+          controller: cubit.positionController,
+          keyboardType: TextInputType.text,
+          hintText: Strings.positionHint,
+          showCursor: false,
+          onTap: (){
 
-              controller: cubit.positionController,
-              keyboardType: TextInputType.text,
-              hintText: Strings.positionHint,
-
-              onTap: (){
-
-                FocusScope.of(context).requestFocus(FocusNode());
-                showModalBottomSheet(context: context,
-                    shape:const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
-                      )
-                    ),
-                    builder: (context){
+            FocusScope.of(context).requestFocus(FocusNode());
+            showModalBottomSheet(context: context,
+                shape:const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    )
+                ),
+                builder: (context){
                   return   ShowModelBottomSheet(
-
+                    cubit: cubit,
                   );
-                    }
-                );
+                }
+            );
 
-              },
+          },
+        ),
+        SizedBox(height: 4.h,),
+        Row(
+          children: [
+            Expanded(
+              child: CustomButton(
+                  buttonStyle: TextButton.styleFrom(
+                      backgroundColor:ColorManager.white,
+                      shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                              width: 0.2.h,
+                              color: ColorManager.primary
+                          ),
+                          borderRadius:BorderRadius.circular(15)
+                      )),
+                  backGroundColor: ColorManager.white,
+                  fontSize: 14.sp,
+                  onPressed: (){
+                    GoRouter.of(context).pop();
+                  },
+                  textColor: ColorManager.primary,
+                  text: Strings.back),
             ),
-            SizedBox(height: 4.h,),
-            Row(
-              children: [
-                Expanded(
-                  child: CustomButton(
-                      buttonStyle: TextButton.styleFrom(
-                          backgroundColor:ColorManager.white,
-                          shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                  width: 0.2.h,
-                                  color: ColorManager.primary
-                              ),
-                              borderRadius:BorderRadius.circular(15)
-                          )),
-                      backGroundColor: ColorManager.white,
-                      fontSize: 14.sp,
-                      onPressed: (){
-                        GoRouter.of(context).pop();
-                      },
-                      textColor: ColorManager.primary,
-                      text: Strings.back),
-                ),
-                SizedBox(width: 4.h,),
-                Expanded(
-                  child: CustomButton(
-                    onPressed: () {
-                      GoRouter.of(context).push(AppRouter.rTakePhoto);
-                    },
-                    backGroundColor: ColorManager.primary,
-                    textColor: ColorManager.white,
-                    text: Strings.next,
-                    fontSize: 16.sp,
-                  ),
-                ),
-              ],
+            SizedBox(width: 4.h,),
+            Expanded(
+              child: CustomButton(
+                onPressed: () {
+                  GoRouter.of(context).push(AppRouter.rTakePhoto);
+                },
+                backGroundColor: ColorManager.primary,
+                textColor: ColorManager.white,
+                text: Strings.next,
+                fontSize: 16.sp,
+              ),
             ),
-
-
           ],
-        );
-      },
+        ),
+
+
+      ],
     );
   }
 }

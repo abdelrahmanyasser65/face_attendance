@@ -34,7 +34,9 @@ abstract class AppRouter{
       ),
       GoRoute(
         path: AppRouter.rTakePhoto,
-        builder: (context,state)=>const TakePhotoView(),
+        builder: (context,state)=>const TakePhotoView(
+
+        ),
       ),
     ],
   );

@@ -6,14 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import '../../../../../core/resours/colors.dart';
 
-class ShowModelBottomSheet extends StatefulWidget {
-  ShowModelBottomSheet({Key? key,}) : super(key: key);
-
-  @override
-  State<ShowModelBottomSheet> createState() => _ShowModelBottomSheetState();
-}
-
-class _ShowModelBottomSheetState extends State<ShowModelBottomSheet> {
+class ShowModelBottomSheet extends StatelessWidget {
+  ShowModelBottomSheet({Key? key, required this.cubit,}) : super(key: key);
+final SignUpCubit cubit;
   final List positionTitle = [
     Strings.manager,
     Strings.teamLeader,
@@ -24,7 +19,6 @@ class _ShowModelBottomSheetState extends State<ShowModelBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    var cubit=SignUpCubit();
     return  Container(
       height: 30.h,
       padding: EdgeInsets.only(
@@ -57,9 +51,11 @@ class _ShowModelBottomSheetState extends State<ShowModelBottomSheet> {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
-                      setState(() {
-                        AppConstants.position=positionTitle[index];
-                      });
+                      cubit.positionName(positionTitle[index]);
+                      // setState(() {
+                      //   AppConstants.position=positionTitle[index];
+                      // });
+
                       Navigator.pop(context);
                     },
                     child: CustomText(

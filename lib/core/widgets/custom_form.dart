@@ -14,7 +14,7 @@ class CustomTextField extends StatelessWidget {
         this.maxLines = 1,
         required this.hintText,
         this.enabled=true,
-
+        this.showCursor,
         this.onTap,
         this.obscureText = false})
       : super(key: key);
@@ -28,7 +28,7 @@ class CustomTextField extends StatelessWidget {
   final Widget ?suffixIcon;
   final bool enabled ;
   final Function()? onTap;
-
+  final bool ?showCursor;
   @override
   Widget build(BuildContext context) {
     return TextField(
@@ -37,6 +37,7 @@ class CustomTextField extends StatelessWidget {
       controller: controller,
       onChanged: onChanged,
       onTap: onTap,
+      showCursor:showCursor ,
       keyboardType: keyboardType,
       cursorColor: ColorManager.grey,
       obscureText: obscureText,
